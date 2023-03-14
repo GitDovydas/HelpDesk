@@ -1,5 +1,8 @@
 package helpdesk.controller;
 
+import helpdesk.model.User;
+import helpdesk.model.UserDAO;
+import helpdesk.utils.Password;
 import helpdesk.utils.Validation;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -14,6 +17,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class RegisterController {
     @FXML
@@ -56,7 +60,12 @@ public class RegisterController {
         } else if (!Validation.isValidEmail(email.getText())) {
             error_message.setText("Email is not valid");
         } else {
-            onCancelButtonClick(actionEvent);
+            try {
+                UserDAO.create(new User(username.getText(), Password.hashPassword(password1.getText()), email.getText()));
+                onCancelButtonClick(actionEvent);
+            } catch (SQLException throwables) {
+                error_message.setText("Username or email is already taken");
+            }
         }
     }
 }
