@@ -2,7 +2,6 @@ package helpdesk.controller;
 
 import helpdesk.utils.Validation;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -30,26 +29,21 @@ public class LoginController {
 
     public void onLoginButtonClick(ActionEvent actionEvent) {
         // Aprašomas mygtuko paspaudimas
-        login_button.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                // Aprašomi veiksmai, kurie bus atlikti paspaudus mygtuką
-                // Atliekama vartotojo įvestų duomenų validacija
-                if (Validation.isValidUsername(username.getText()) && Validation.isValidPassword(password.getText())) {
-                    // Jei gerai įvesti duomenys reikės pereiti iš login ekrano į pagrindinį langą
-                    goToDashboard(event);
-                } else {
-                    login_error.setText("Wrong username or password");
-                }
-            }
-        });
+        // Aprašomi veiksmai, kurie bus atlikti paspaudus mygtuką
+        // Atliekama vartotojo įvestų duomenų validacija
+        if (Validation.isValidUsername(username.getText()) && Validation.isValidPassword(password.getText())) {
+            // Jei gerai įvesti duomenys reikės pereiti iš login ekrano į pagrindinį langą
+            goToDashboard(actionEvent);
+        } else {
+            login_error.setText("Wrong username or password");
+        }
     }
 
     public void onRegisterButtonClick(ActionEvent actionEvent) {
         // Mes esame kontrolerio aplanke, bet vaizdo čia nėra, todėl mes turime pakilti vienu aplanku į viršų (../)
         try {
             // Sukuriamas dashboard langas
-            Parent root = FXMLLoader.load(getClass().getResource("../view/register.fxml"));
+            Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("view/register.fxml"));
             Stage stage = new Stage();
             stage.setTitle(("Register"));
             stage.setScene(new Scene(root, 550, 450));
@@ -65,7 +59,7 @@ public class LoginController {
         // Mes esame kontrolerio aplanke, bet vaizdo čia nėra, todėl mes turime pakilti vienu aplanku į viršų (../)
         try {
             // Sukuriamas dashboard langas
-            Parent root = FXMLLoader.load(getClass().getResource("../view/dashboard.fxml"));
+            Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("view/dashboard.fxml"));
             Stage stage = new Stage();
             stage.setTitle(("Dashboard"));
             stage.setScene(new Scene(root, 800, 700));
