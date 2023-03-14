@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="helpdesk.controller.RegisterController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="helpdesk.controller.RegisterController">
    <children>
       <Label alignment="CENTER" contentDisplay="CENTER" prefWidth="Infinity" text="Register" VBox.vgrow="ALWAYS">
          <font>
@@ -22,7 +22,7 @@
                   <Insets right="30.0" />
                </HBox.margin>
             </Label>
-            <TextField fx:id="username" />
+            <TextField fx:id="username" minWidth="200.0" />
          </children></HBox>
       <HBox alignment="CENTER" prefHeight="40.0" prefWidth="200.0">
          <children>
@@ -31,7 +31,7 @@
                   <Insets right="30.0" />
                </HBox.margin>
             </Label>
-            <PasswordField fx:id="password1" />
+            <PasswordField fx:id="password1" minWidth="200.0" />
          </children></HBox>
       <HBox alignment="CENTER" layoutX="10.0" layoutY="137.0" prefHeight="40.0" prefWidth="200.0">
          <children>
@@ -40,7 +40,7 @@
                   <Insets right="30.0" />
                </HBox.margin>
             </Label>
-            <PasswordField fx:id="password2" />
+            <PasswordField fx:id="password2" minWidth="200.0" />
          </children>
       </HBox>
       <HBox alignment="CENTER" prefHeight="40.0" prefWidth="200.0">
@@ -50,7 +50,7 @@
                   <Insets right="30.0" />
                </HBox.margin>
             </Label>
-            <TextField fx:id="email" />
+            <TextField fx:id="email" minWidth="200.0" />
          </children>
       </HBox>
       <Label fx:id="error_message" alignment="CENTER" contentDisplay="CENTER" minHeight="50.0" prefWidth="Infinity" VBox.vgrow="ALWAYS" />

@@ -44,12 +44,8 @@ public class LoginController {
         try {
             // Sukuriamas dashboard langas
             Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("view/register.fxml"));
-            Stage stage = new Stage();
-            stage.setTitle(("Register"));
-            stage.setScene(new Scene(root, 550, 450));
-            stage.show();
-            // Paslepiamas prisijungimo langas
-            ((Node) (actionEvent.getSource())).getScene().getWindow().hide();
+            Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+            stage.setScene(new Scene((root), 550, 450));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -60,12 +56,8 @@ public class LoginController {
         try {
             // Sukuriamas dashboard langas
             Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("view/dashboard.fxml"));
-            Stage stage = new Stage();
-            stage.setTitle(("Dashboard"));
+            Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
             stage.setScene(new Scene(root, 800, 700));
-            stage.show();
-            // Paslepiamas prisijungimo langas
-            ((Node) (actionEvent.getSource())).getScene().getWindow().hide();
         } catch (IOException e) {
             e.printStackTrace();
         }

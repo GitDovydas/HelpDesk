@@ -39,12 +39,8 @@ public class RegisterController {
         try {
             // Sukuriamas dashboard langas
             Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("view/login.fxml"));
-            Stage stage = new Stage();
-            stage.setTitle(("Login"));
+            Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
             stage.setScene(new Scene(root, 550, 450));
-            stage.show();
-            // Paslepiamas prisijungimo langas
-            ((Node) (actionEvent.getSource())).getScene().getWindow().hide();
         } catch (IOException e) {
             e.printStackTrace();
         }

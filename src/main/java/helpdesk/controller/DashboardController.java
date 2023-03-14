@@ -14,7 +14,7 @@ import java.io.IOException;
 public class DashboardController {
     @FXML
     Button return_button;
-    // Jei nerodo ikonėlių prie FXML elementų patikrinti ar FMLe yra nurodytas kontroleris
+    // Jei nerodo ikonėlių prie FXML elementų patikrinti ar FXML'e yra nurodytas kontroleris
 
     /**
      * Funkcija grąžinantį vartotoją į login langą
@@ -23,12 +23,8 @@ public class DashboardController {
         try {
             // Sukuriamas dashboard langas
             Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("view/login.fxml"));
-            Stage stage = new Stage();
-            stage.setTitle(("Login"));
+            Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
             stage.setScene(new Scene(root, 550, 450));
-            stage.show();
-            // Paslepiamas prisijungimo langas
-            ((Node) (actionEvent.getSource())).getScene().getWindow().hide();
         } catch (IOException e) {
             e.printStackTrace();
         }
