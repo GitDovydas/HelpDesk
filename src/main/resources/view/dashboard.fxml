@@ -1,26 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.collections.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" stylesheets="@style.css"
-          fx:controller="helpdesk.controller.DashboardController">
-            <!--   ^^^^^^^^^  Kai sukuriamas vaizdas pvz(dashboard.fxml) būtina vaizdui nurodyti su juo dirbandtį kontrolerį     -->
-    <columnConstraints>
-    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-  </columnConstraints>
-  <rowConstraints>
-    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-  </rowConstraints>
-   <children>
-      <Pane prefHeight="200.0" prefWidth="200.0">
+<SplitPane dividerPositions="0.3063439065108514" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1000.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="helpdesk.controller.DashboardController">
+  <items>
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="303.0">
          <children>
-            <Label layoutX="92.0" layoutY="38.0" text="DashBoard window" />
-            <Button fx:id="return_button" layoutX="122.0" layoutY="79.0" onAction="#goToLogin" mnemonicParsing="false" text="Button" />
+             <ComboBox fx:id="request_type" layoutX="13.0" layoutY="38.0" prefHeight="25.0" prefWidth="149.0">
+                 <items>
+                     <FXCollections fx:factory="observableArrayList">
+                         <String fx:value="Bug" />
+                         <String fx:value="Feature" />
+                     </FXCollections>
+                 </items>
+             </ComboBox>
+            <Label layoutX="14.0" layoutY="14.0" text="Request Type" />
+            <Label layoutX="14.0" layoutY="80.0" text="Your email" />
+            <TextField fx:id="email" layoutX="11.0" layoutY="104.0" prefHeight="25.0" prefWidth="278.0" />
+            <Label layoutX="14.0" layoutY="155.0" text="Title" />
+            <TextField layoutX="11.0" layoutY="174.0" prefHeight="25.0" prefWidth="278.0" />
+            <Label layoutX="12.0" layoutY="218.0" prefHeight="17.0" prefWidth="72.0" text="Description" />
+            <TextField alignment="TOP_LEFT" layoutX="14.0" layoutY="235.0" prefHeight="291.0" prefWidth="278.0" />
+             <Button fx:id="return_button" layoutX="76.0" layoutY="562.0" mnemonicParsing="false" onAction="#goToLogin" text="Exit" />
+            <Button layoutX="195.0" layoutY="562.0" mnemonicParsing="false" text="Create" />
+         </children></AnchorPane>
+      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+         <children>
+            <TableView layoutX="10.0" layoutY="14.0" prefHeight="776.0" prefWidth="670.0">
+              <columns>
+                <TableColumn prefWidth="75.0" text="ID" />
+                <TableColumn prefWidth="75.0" text="USER" />
+                <TableColumn prefWidth="113.0" text="REQUEST_TYPE" />
+                <TableColumn prefWidth="113.0" text="TITLE" />
+                <TableColumn prefWidth="428.0" text="DESCRIPTION" />
+              </columns>
+            </TableView>
          </children>
-      </Pane>
-   </children>
-</GridPane>
+      </AnchorPane>
+  </items>
+</SplitPane>

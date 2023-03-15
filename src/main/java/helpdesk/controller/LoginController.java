@@ -2,6 +2,7 @@ package helpdesk.controller;
 
 import helpdesk.utils.Validation;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -11,6 +12,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -51,15 +54,26 @@ public class LoginController {
         }
     }
 
-    public void goToDashboard(ActionEvent actionEvent) {
+    public void goToDashboard(Event event) {
         // Mes esame kontrolerio aplanke, bet vaizdo čia nėra, todėl mes turime pakilti vienu aplanku į viršų (../)
         try {
             // Sukuriamas dashboard langas
             Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("view/dashboard.fxml"));
-            Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(root, 800, 700));
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root, 1000, 800));
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    public void enterPressed(KeyEvent keyEvent) {
+        if (keyEvent.getCode() == KeyCode.ENTER){
+            if (Validation.isValidUsername(username.getText()) && Validation.isValidPassword(password.getText())) {
+                // Jei gerai įvesti duomenys reikės pereiti iš login ekrano į pagrindinį langą
+                goToDashboard(keyEvent);
+            } else {
+                login_error.setText("Wrong username or password");
+            }
         }
     }
 }

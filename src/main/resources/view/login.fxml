@@ -30,7 +30,7 @@
                   <Insets right="30.0" />
                </HBox.margin>
             </Label>
-            <PasswordField fx:id="password" minWidth="200.0" />
+            <PasswordField fx:id="password" minWidth="200.0" onKeyPressed="#enterPressed" />
          </children>
       </HBox>
       <Label fx:id="login_error" alignment="CENTER" minHeight="50.0" prefWidth="Infinity" textFill="RED" />
