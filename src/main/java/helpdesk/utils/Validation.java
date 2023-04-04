@@ -8,6 +8,9 @@ public class Validation {
     public static final String USERNAME_REGEX_PATTERN = "^[a-zA-Z0-9]{5,13}$";
     public static final String PASSWORD_REGEX_PATTERN = "^[a-zA-Z-0-9!@#$%]{5,13}$";
     public static final String USER_EMAIL_REGEX_PATTERN = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+.[A-Za-z]{2,50}$";
+    public static final String TITLE_REGEX_PATTERN = "^[a-zA-Z0-9., ]{5,128}$";
+    public static final String DESCRIPTION_REGEX_PATTERN = "^[a-zA-Z0-9,.+*@#?! ]{5,512}$";
+    public static final String ID_REGEX_PATTERN =  "^[0-9]{1,15}$";
 
     /**
      * Funkcija tikrinanati ar varototjo įvesti duoemnys prisijungimo vardui atitinka validacijos šabloną
@@ -34,4 +37,26 @@ public class Validation {
         Matcher matcher = pattern.matcher(email);
         return matcher.find();
     }
+
+    // Title laukelio ilgis privalo būti nuo 5 iki 128 simbolių, gali būti raidės, gali būti skaičiai
+    // Spec simboliai: , . -
+    public static boolean isTitleValid(String title) {
+        Pattern pattern = Pattern.compile(TITLE_REGEX_PATTERN);
+        Matcher matcher = pattern.matcher(title);
+        return matcher.find();
+    }
+
+    // Description laukelio ilgis nuo 5 iki 512
+    public static boolean isDesciptionValid(String description) {
+        Pattern pattern = Pattern.compile(DESCRIPTION_REGEX_PATTERN);
+        Matcher matcher = pattern.matcher(description);
+        return matcher.find();
+    }
+    // Description laukelio ilgis nuo 5 iki 512
+    public static boolean isIdValid(String id) {
+        Pattern pattern = Pattern.compile(ID_REGEX_PATTERN);
+        Matcher matcher = pattern.matcher(id);
+        return matcher.find();
+    }
+
 }
