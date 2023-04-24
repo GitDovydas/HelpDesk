@@ -1,5 +1,6 @@
 package helpdesk.controller;
 
+import com.sun.xml.internal.bind.v2.TODO;
 import helpdesk.model.RequestForm;
 import helpdesk.model.RequestFormDAO;
 import helpdesk.utils.Validation;
@@ -47,6 +48,8 @@ public class DashboardController {
     private CheckBox logistics;
     @FXML
     private CheckBox marketing;
+    @FXML
+    private Label username_label;
 //    @FXML
 //    private Button return_button;
     @FXML
@@ -217,7 +220,11 @@ public class DashboardController {
         }
 
         try {
-            RequestFormDAO.update(new RequestForm(id, requestType, email, title, description, isPictureIncluded, interests));
+            //TODO: Pagal username_label is GUI (Duoda vartotojo varda kuris yra prisijunges prie sistemos)
+            //Reikia parašyti užklausa duomenų bazėje, kuri gražintų vartotojo id
+            //Tada jį perduosim į update metodą
+
+            RequestFormDAO.update(new RequestForm(id, requestType, email, title, description, isPictureIncluded, interests, 1));
             this.message.setTextFill(Color.GREEN);
             this.message.setText("Successfully updated entry");
         } catch (SQLException throwables) {
@@ -241,7 +248,9 @@ public class DashboardController {
 
     public void onSearchAction(ActionEvent actionEvent) {
         try {
-            this.updateTableFromDB(this.title.getText());
+            String title = this.title.getText();
+
+            updateTableFromDB(title);
         } catch (SQLException throwables) {
             this.message.setText("Search failed");
             throwables.printStackTrace();
@@ -282,7 +291,7 @@ public class DashboardController {
             data.clear();
             while (rsAllEntries.next()) {
                 //Iterate Row
-                ObservableList row = FXCollections.observableArrayList();
+                ObservableList<String> row = FXCollections.observableArrayList();
                 for (int i = 1; i <= rsAllEntries.getMetaData().getColumnCount(); i++) {
                     //Iterate Column
                     row.add(rsAllEntries.getString(i));
@@ -295,4 +304,7 @@ public class DashboardController {
             this.message.setText("Failure in getting all entries");
         }
     }
+
+
+
 }

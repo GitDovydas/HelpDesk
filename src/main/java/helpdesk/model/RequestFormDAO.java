@@ -46,11 +46,20 @@ public class RequestFormDAO {
 
     public static ResultSet search(String title) throws SQLException {
         Connection connection = DriverManager.getConnection(URL, prisijungimas[0], prisijungimas[1]);
-        PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM request_form where title LIKE ?");
-        preparedStatement.setString(1, title);
+        // TODO: Jeigu title yra tusčias, suformuoti select kuris grąžins visus duomenis esančius lentelėje. (Nereikia where)
+        // tačiau jeigu title nėra tusčias vykdyti select kuris aprašytas eilute žemiau
+        PreparedStatement preparedStatement;
+        if (title.isEmpty()){
+            preparedStatement = connection.prepareStatement("SELECT * FROM request_form");
+        } else {
+            preparedStatement = connection.prepareStatement("SELECT * FROM request_form WHERE title LIKE ?");
+            preparedStatement.setString(1, title);
+        }
+
         ResultSet resultSet = preparedStatement.executeQuery();
-        preparedStatement.close();
-        connection.close();
+//        preparedStatement.close();
+//        connection.close();
         return resultSet;
     }
+
 }

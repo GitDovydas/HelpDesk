@@ -8,6 +8,7 @@ public class RequestForm {
     private String description;
     private boolean isPictureIncluded;
     private String areaOfInterest;
+    private int userId;
 
     public RequestForm() {
     }
@@ -21,7 +22,7 @@ public class RequestForm {
         this.areaOfInterest = areaOfInterest;
     }
 
-    public RequestForm(int id, String requestType, String email, String title, String description, boolean isPictureIncluded, String areaOfInterest) {
+    public RequestForm(int id, String requestType, String email, String title, String description, boolean isPictureIncluded, String areaOfInterest, int userId) {
         this.id = id;
         this.requestType = requestType;
         this.email = email;
@@ -29,6 +30,7 @@ public class RequestForm {
         this.description = description;
         this.isPictureIncluded = isPictureIncluded;
         this.areaOfInterest = areaOfInterest;
+        this.userId = userId;
     }
 
     public String getRequestType() {
@@ -85,5 +87,13 @@ public class RequestForm {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 }

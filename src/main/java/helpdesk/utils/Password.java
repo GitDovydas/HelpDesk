@@ -16,16 +16,16 @@ public class Password {
 
     /**
      * Funkcija patikrinant ar vartotojo 5vestas slaptažodis atitinka užšifruotą slaptažodį
-     * @param passwordPLainText vartotojo įvestas slaptažodis
+     * @param passwordPlainText vartotojo įvestas slaptažodis
      * @param storedHash užkoduotas slaptažodis
      * @return true - jeigu atitinka, false - priešingu atveju
      */
-    public static boolean checkPassword(String passwordPLainText, String storedHash) {
+    public static boolean checkPassword(String passwordPlainText, String storedHash) {
         boolean passwordVarified = false;
         if (storedHash == null || !storedHash.startsWith("$2a$")) {
             throw new java.lang.IllegalArgumentException("Neteisinga bCrypt koduotė palyginimui");
         }
-        passwordVarified = BCrypt.checkpw(passwordPLainText, storedHash);
+        passwordVarified = BCrypt.checkpw(passwordPlainText, storedHash);
         return passwordVarified;
     }
 }

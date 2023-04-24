@@ -1,5 +1,8 @@
 package helpdesk.controller;
 
+import helpdesk.model.RequestFormDAO;
+import helpdesk.model.User;
+import helpdesk.model.UserDAO;
 import helpdesk.utils.Validation;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
@@ -17,6 +20,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class LoginController {
     @FXML
@@ -35,8 +39,25 @@ public class LoginController {
         // Aprašomi veiksmai, kurie bus atlikti paspaudus mygtuką
         // Atliekama vartotojo įvestų duomenų validacija
         if (Validation.isValidUsername(username.getText()) && Validation.isValidPassword(password.getText())) {
+            try {
+                // TODO: Kadangi vartotojo slaptažodis duomenų bazėje yra šifruotas
+                // O vartotojas įveda plain text (Nešifruotą)
+                // Reikia patikrinti ar jie sutampa (password.checkPassword(vartotojo įvestas, šifruotas db))
+                // Todėl reikės gauti vartotojo šifruotą slaptažodį iš db ir perduoti aukščiau parašytam metodui
+                // Jeigu jie sutaps vartotojas yra autentifikuotas
+                User vartotojas = UserDAO.userLogin(username.getText(), password.getText());
+                if (vartotojas == null){
+                    login_error.setText("Wrong username or password");
+                } else {
+                    goToDashboard(actionEvent);
+                }
+            } catch (SQLException throwables) {
+                login_error.setText("Klaida ok");
+            }
+            // TODO: Jeigu vartotojas praeina front-end validacija, tada darome back-end validacija
+            // Tai yra: kreiptis į duomenų bazę ir patikrinti ar egzistuoja toks vartotojas (username ir password)
+            // Jeigu egzistuoja sukuriamas objektas
             // Jei gerai įvesti duomenys reikės pereiti iš login ekrano į pagrindinį langą
-            goToDashboard(actionEvent);
         } else {
             login_error.setText("Wrong username or password");
         }
@@ -76,4 +97,12 @@ public class LoginController {
             }
         }
     }
+
+//    public void initialize(){
+//        try {
+//            System.out.println(UserDAO.findUserIdByUsername("Dovydas"));
+//        } catch (SQLException throwables) {
+//            throwables.printStackTrace();
+//        }
+//    }
 }

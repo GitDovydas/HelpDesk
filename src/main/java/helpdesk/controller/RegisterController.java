@@ -57,7 +57,7 @@ public class RegisterController {
             error_message.setText("Email is not valid");
         } else {
             try {
-                UserDAO.create(new User(username.getText(), Password.hashPassword(password1.getText()), email.getText()));
+                UserDAO.create(new User(username.getText(), Password.hashPassword(password1.getText()), email.getText(), false));
                 onCancelButtonClick(actionEvent);
             } catch (SQLException throwables) {
                 error_message.setText("Username or email is already taken");
